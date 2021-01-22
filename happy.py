@@ -36,6 +36,18 @@ def human_input(magic_square, game_board, human_list, computer_list):
 pairs_sum = [] 
 k = 0
 def computer_input(magic_square, game_board, human_list, computer_list, k):
+    pairs_sum = pairs(computer_list)
+    for x in pairs_sum:
+        for i in range(3):
+            for j in range(3):
+                if x == magic_square[i][j]:
+                    computer_list.append(x)
+                    game_board[i][j] = 2
+                    print("Winner Bro")
+                    k = 1
+                    return game_board, k
+
+
     pairs_sum = pairs(human_list)
     for x in pairs_sum:
         for i in range(3):
@@ -47,16 +59,6 @@ def computer_input(magic_square, game_board, human_list, computer_list, k):
                     k = 0
                     return game_board, k
 
-    pairs_sum = pairs(computer_list)
-    for x in pairs_sum:
-        for i in range(3):
-            for j in range(3):
-                if x == magic_square[i][j]:
-                    computer_list.append(x)
-                    game_board[i][j] = 2
-                    print("Winner Bro")
-                    k = 1
-                    return game_board, k
     while True:
             crows = random.randint(0,2)
             ccols = random.randint(0,2)
@@ -69,11 +71,15 @@ def computer_input(magic_square, game_board, human_list, computer_list, k):
 
 def game(magic_square, game_board, human_list, computer_list, k):
     while True:
+        print("It's your turn, Enter the rows and columns coordinates: ")
+        print()
         game_board = human_input(magic_square, game_board, human_list, computer_list)
         print_gameboard(game_board)
-        game_board, k = computer_input(magic_square, game_board, human_list, computer_list, k)
+        print("computer's turn")
+        print()
+        game_board, j = computer_input(magic_square, game_board, human_list, computer_list, k)
         print_gameboard(game_board)
-        if k != 0:
-            print("you lose you fucking loser")
+        if j != 0:
+            print("you lose you loser")
             break
 game(magic_square, game_board, human_list, computer_list, k)
