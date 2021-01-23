@@ -189,7 +189,7 @@ def game(magic_square, game_board,plays, human_list, computer_list):
                     
                 print("human's turn")
                 print()
-                game_board, j = human_input(magic_square, game_board,plays[1], human_list, computer_list)
+                game_board = human_input(magic_square, game_board,plays[1], human_list, computer_list)
                 
                 print_gameboard(game_board)
                 i = i + 1
