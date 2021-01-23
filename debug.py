@@ -2,7 +2,6 @@ import random
 
 # x or O is used to mark the position on the board
 plays = ['X','O']
-k = random.randint(0,2)
 
 game_board = [["-", "-", "-"],
          ["-", "-", "-"],
@@ -113,6 +112,16 @@ def computer_input(magic_square, game_board, plays,human_list, computer_list):
 # main function which comprises of all the functions 
 
 def game(magic_square, game_board,plays, human_list, computer_list):
+    game_board = [["-", "-", "-"],
+         ["-", "-", "-"],
+         ["-", "-", "-"]]
+
+    magic_square = [[8, 3, 4],
+                    [1, 5, 9],
+                    [6, 7, 2]]
+    # human_list and computer_list are two lists which stores the inputs of human and computer respectively
+    human_list = []
+    computer_list = []
     print("WELCOME TO TIC-TAC-TOE")
     print_square(game_board)
     coin = ['heads', 'tails']
@@ -136,6 +145,9 @@ def game(magic_square, game_board,plays, human_list, computer_list):
                 # last input will be given by human
                 if i == 9:
                     print("The game is a draw!")
+                    replay = input("If you want to play again press Y else N")
+                    if replay == 'Y':
+                        game(magic_square, game_board,plays, human_list, computer_list)
                     break
                 print("computer's turn")
                 print()
@@ -144,18 +156,9 @@ def game(magic_square, game_board,plays, human_list, computer_list):
                 i = i + 1
                 if check_win(game_board):
                     print("you lost the game.")
-                    game_board = [["-", "-", "-"],
-                             ["-", "-", "-"],
-                             ["-", "-", "-"]]
-
-                    magic_square = [[8, 3, 4],
-                                    [1, 5, 9],
-                                    [6, 7, 2]]
-
-                    human_list = []
-                    computer_list = []
                     replay = input("If you want to play again press Y else N")
-                    game(magic_square, game_board,plays, human_list, computer_list)
+                    if replay == 'Y':
+                        game(magic_square, game_board,plays, human_list, computer_list)
                     break
                 
         else:
@@ -167,29 +170,21 @@ def game(magic_square, game_board,plays, human_list, computer_list):
                 print_gameboard(game_board)
                 if check_win(game_board):
                     print("you lost the game.")
-                    game_board = [["-", "-", "-"],
-                             ["-", "-", "-"],
-                             ["-", "-", "-"]]
-
-                    magic_square = [[8, 3, 4],
-                                    [1, 5, 9],
-                                    [6, 7, 2]]
-
-                    human_list = []
-                    computer_list = []
-                    
                     replay = input("If you want to play again press Y else N: ")
                     if replay == 'Y':
                         game(magic_square, game_board,plays, human_list, computer_list)
                     if i == 9:
                         print("The game is a draw!")
+                        replay = input("If you want to play again press Y else N: ")
+                        if replay == 'Y':
+                            game(magic_square, game_board,plays, human_list, computer_list)
                         break
                         
                     break
                     
                 print("human's turn")
                 print()
-                game_board = human_input(magic_square, game_board,plays[1], human_list, computer_list)
+                game_board, j = human_input(magic_square, game_board,plays[1], human_list, computer_list)
                 
                 print_gameboard(game_board)
                 i = i + 1
@@ -204,29 +199,21 @@ def game(magic_square, game_board,plays, human_list, computer_list):
                 print_gameboard(game_board)
                 if check_win(game_board):
                     print("you lost the game.")
-                    game_board = [["-", "-", "-"],
-                             ["-", "-", "-"],
-                             ["-", "-", "-"]]
-
-                    magic_square = [[8, 3, 4],
-                                    [1, 5, 9],
-                                    [6, 7, 2]]
-
-                    human_list = []
-                    computer_list = []
-                    
-                    
                     replay = input("If you want to play again press Y else N: ")
-                    game(magic_square, game_board,plays, human_list, computer_list)
+                    if replay == 'Y':
+                        game(magic_square, game_board,plays, human_list, computer_list)
                     break
                 if i == 9:
-                        print("The game is a draw!")
-                        break  
+                    print("The game is a draw!")
+                    replay = input("If you want to play again press Y else N: ")
+                    if replay == 'Y':
+                        game(magic_square, game_board,plays, human_list, computer_list)
+                    break  
                 
                 print("human's turn")
                 print()
-                game_board= human_input(magic_square, game_board,plays[1], human_list, computer_list)
+                game_board = human_input(magic_square, game_board,plays[1], human_list, computer_list)
                 print_gameboard(game_board)
                 i = i + 1
                  
-game(magic_square, game_board, plays,human_list, computer_list)       
+game(magic_square, game_board, plays,human_list, computer_list)
