@@ -10,6 +10,9 @@ game_board = [["-", "-", "-"],
 magic_square = [[8, 3, 4],
                 [1, 5, 9],
                 [6, 7, 2]]
+lost = 0
+draw = 0
+
 # human_list and computer_list are two lists which stores the inputs of human and computer respectively
 human_list = []
 computer_list = []
@@ -111,7 +114,7 @@ def computer_input(magic_square, game_board, plays,human_list, computer_list):
 
 # main function which comprises of all the functions 
 
-def game(magic_square, game_board,plays, human_list, computer_list):
+def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
     game_board = [["-", "-", "-"],
          ["-", "-", "-"],
          ["-", "-", "-"]]
@@ -148,6 +151,8 @@ def game(magic_square, game_board,plays, human_list, computer_list):
                     replay = input("If you want to play again press Y else N")
                     if replay == 'Y':
                         game(magic_square, game_board,plays, human_list, computer_list)
+                        draw = draw + 1
+                    print("Drawed games: ", draw, "lost games: ", lost)
                     break
                 print("computer's turn")
                 print()
@@ -157,8 +162,10 @@ def game(magic_square, game_board,plays, human_list, computer_list):
                 if check_win(game_board):
                     print("you lost the game.")
                     replay = input("If you want to play again press Y else N")
+                    lost = lost + 1
+                    print("Drawed games: ", draw, "lost games: ", lost)
                     if replay == 'Y':
-                        game(magic_square, game_board,plays, human_list, computer_list)
+                        game(magic_square, game_board,plays, human_list, computer_list, draw, lost)
                     break
                 
         else:
@@ -170,16 +177,19 @@ def game(magic_square, game_board,plays, human_list, computer_list):
                 print_gameboard(game_board)
                 if check_win(game_board):
                     print("you lost the game.")
+                    lost = lost + 1
+                    print("Drawed games: ", draw, "lost games: ", lost)
                     replay = input("If you want to play again press Y else N: ")
                     if replay == 'Y':
                         game(magic_square, game_board,plays, human_list, computer_list)
                     if i == 9:
                         print("The game is a draw!")
+                        draw = draw + 1
+                        print("Drawed games: ", draw, "lost games: ", lost)
                         replay = input("If you want to play again press Y else N: ")
                         if replay == 'Y':
                             game(magic_square, game_board,plays, human_list, computer_list)
                         break
-                        
                     break
                     
                 print("human's turn")
@@ -199,15 +209,19 @@ def game(magic_square, game_board,plays, human_list, computer_list):
                 print_gameboard(game_board)
                 if check_win(game_board):
                     print("you lost the game.")
+                    lost = lost + 1
+                    print("Drawed games: ", draw, "lost games: ", lost)
                     replay = input("If you want to play again press Y else N: ")
                     if replay == 'Y':
-                        game(magic_square, game_board,plays, human_list, computer_list)
+                        game(magic_square, game_board,plays, human_list, computer_list, draw, lost)
                     break
                 if i == 9:
                     print("The game is a draw!")
+                    draw = draw + 1
+                    print("Drawed games: ", draw, "lost games: ", lost)
                     replay = input("If you want to play again press Y else N: ")
                     if replay == 'Y':
-                        game(magic_square, game_board,plays, human_list, computer_list)
+                        game(magic_square, game_board,plays, human_list, computer_list, draw, lost)
                     break  
                 
                 print("human's turn")
@@ -216,4 +230,4 @@ def game(magic_square, game_board,plays, human_list, computer_list):
                 print_gameboard(game_board)
                 i = i + 1
                  
-game(magic_square, game_board, plays,human_list, computer_list)
+game(magic_square, game_board, plays,human_list, computer_list, draw, lost)
