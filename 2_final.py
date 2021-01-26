@@ -104,7 +104,7 @@ def computer_input(magic_square, game_board, plays,human_list, computer_list):
                     game_board[i][j] = plays
                     
                     return game_board
-
+# computer places random integers in the board for first two turns
     while True:
             crows = random.randint(0,2)
             ccols = random.randint(0,2)
@@ -149,7 +149,7 @@ def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
                 i = i+1
                 print_gameboard(game_board,human_list,computer_list)
                 
-                # as last input will be given by human 
+                #  when all the grids are filled in the game board and it's a draw 
                 if i == 9:
                     print("The game is a draw!")
                     draw = draw + 1
@@ -168,7 +168,7 @@ def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
                     lost = lost + 1
                     print("Drawed games: ", draw, "lost games: ", lost)
                     replay = input("If you want to play again press Y else N: ")
-                    
+                    # replay function starts a new game again
                     
                     if replay == 'Y':
                         game(magic_square, game_board,plays, human_list, computer_list, draw, lost)
@@ -190,7 +190,7 @@ def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
                         game(magic_square, game_board,plays, human_list, computer_list,draw,lost)
                         
                     break                        
-                if i == 9:
+                if i == 9:    # when all the grids are filled in the game board and it's a draw 
                      print("The game is a draw!")
                      draw = draw + 1
                      print("Drawed games: ", draw, "lost games: ", lost)
@@ -207,7 +207,7 @@ def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
                 print_gameboard(game_board,human_list,computer_list)
                 i = i + 1
                 
-    else:
+    else:  # if human looses the toss computer will get the turn first
         print("you lose the toss")
         print("computer will play first and you will be using o")
         while True:
@@ -223,7 +223,7 @@ def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
                     if replay == 'Y':
                         game(magic_square, game_board,plays, human_list, computer_list, draw, lost)
                     break
-                if i == 9:
+                if i == 9:    # when all the grids are filled in the game board and it's a draw
                     print("The game is a draw!")
                     draw = draw + 1
                     print("Drawed games: ", draw, "lost games: ", lost)
@@ -238,4 +238,4 @@ def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
                 print_gameboard(game_board,human_list,computer_list)
                 i = i + 1
                  
-game(magic_square, game_board, plays,human_list, computer_list, draw, lost)
+game(magic_square, game_board, plays,human_list, computer_list, draw, lost)  # main function of the code
