@@ -3,13 +3,15 @@ import random
 # x or O is used to mark the position on the board
 plays = ['X','O']
 
+# Using a standard notion for our playing environment
 game_board = [["-", "-", "-"],
          ["-", "-", "-"],
          ["-", "-", "-"]]
-
+# Magic square for the algorithm to use it for getting the new move and we have used it in a way to have a dual puropose of keeping track of open spaces for input
 magic_square = [[8, 3, 4],
                 [1, 5, 9],
                 [6, 7, 2]]
+# variables to help with keeping count of lost and drawn games
 lost = 0
 draw = 0
 
@@ -17,14 +19,15 @@ draw = 0
 human_list = []
 computer_list = []
 
-#prints the game board 
+#prints the game board and the inner workings of algorithm
 def print_gameboard(game_board,human_list,computer_list):
     print("   0,    1,    2")
     for count, row in enumerate(game_board):
         print(count, row)   
     print(human_list)
     print(computer_list)
-# pairs list function checks the sum of lists and compute the difference between 15 and sum of list pair elements
+
+# pairs list function starts by pairing all sorts of permutaions and checks the sum of pairs and compute the difference between 15 and sum of list pair elements
 
 def pairs(list):
     pairs = []
@@ -36,7 +39,7 @@ def pairs(list):
                     pairs.append(D)
     return pairs
 
-# tekes human input
+# tekes human input where human provide rows and columns position
 def human_input(magic_square, game_board,plays, human_list, computer_list):
     hrows = int(input("Enter the rows postion for your turn "))
     hcols = int(input("Enter the cols postion for your turn "))
@@ -48,38 +51,38 @@ def human_input(magic_square, game_board,plays, human_list, computer_list):
 pairs_sum = [] 
 k = 0
 
-# prints the game board     
+# prints the game board      
 def print_square(game_board):
     print("    0    1    2")
     for count, row in enumerate(game_board):
         print(count, row)
 
-# checks the possibility of winning the game and places position accordingly
+# checks the possibility of winning the game and places position accordingly where all the winning positions are calculated using loops 
  
 def check_win(game_board):
-    # row
+    # all three rows check
     for i in range(3):
             if game_board[i][0] == game_board[i][1] == game_board[i][2] != '-' :
                 print("winner -", game_board[i][0])
                 return True
     
-    # column
+    # all three column check
     for j in range(3):
             if game_board[0][j] == game_board[1][j] == game_board[2][j] != '-':
                 print("winner |", game_board[0][j])
                 return True
                
-    #left diagonal
+    # left diagonal
     if game_board[0][0] != '-' and  game_board[0][0] == game_board[1][1] == game_board[2][2]:
         print("winner", game_board[0][0])
         return True
 
-    #right diagonal
+    # right diagonal
     if game_board[0][2] != '-' and  game_board[2][0] == game_board[1][1] == game_board[0][2]:
         print("winner", game_board[2][0])
         return True
 
-# gives the computer input
+# gives the computer input and uses pairs to have the best move possible where using if operator it blocks the specified input after assigning
 
 def computer_input(magic_square, game_board, plays,human_list, computer_list):
     pairs_sum = pairs(computer_list)
@@ -88,8 +91,7 @@ def computer_input(magic_square, game_board, plays,human_list, computer_list):
             for j in range(3):
                 if x == magic_square[i][j]:
                     computer_list.append(x)
-                    game_board[i][j] = plays
-                    
+                    game_board[i][j] = play
                     return game_board
 
     pairs_sum = pairs(human_list)
@@ -113,7 +115,7 @@ def computer_input(magic_square, game_board, plays,human_list, computer_list):
                 
                 return game_board
 
-# main function which comprises of all the functions 
+# main function which comprises of all the functions where it has a recursive abilities to let player have choice to play again, and have a look on scoreboard 
 
 def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
     game_board = [["-", "-", "-"],
@@ -133,11 +135,12 @@ def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
     call = input("choose heads or tails: ")
     i = 0   # counter which keeps track of number of turns played by the players
     
-    # random function  is initited to decide who has to play first
+    # Toss is used which contains random function  is initited to decide who has to play first
     if random.choice(coin) == call:
         print("you won the toss")
         print("Want to play first? ")
         a= input("Y or N: ")
+        # Winning toss and going first, you get to play as x as per the rules of tic tac toe
         if a == 'Y':
             while True:
                 print("It's your turn, Enter the rows and columns coordinates: ")
@@ -146,7 +149,7 @@ def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
                 i = i+1
                 print_gameboard(game_board,human_list,computer_list)
                 
-                # last input will be given by human
+                # as last input will be given by human 
                 if i == 9:
                     print("The game is a draw!")
                     draw = draw + 1
@@ -154,7 +157,6 @@ def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
                     replay = input("If you want to play again press Y else N")
                     if replay == 'Y':
                         game(magic_square, game_board,plays, human_list, computer_list)
-                        
                     break
                 print("computer's turn")
                 print()
@@ -237,4 +239,3 @@ def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
                 i = i + 1
                  
 game(magic_square, game_board, plays,human_list, computer_list, draw, lost)
-
