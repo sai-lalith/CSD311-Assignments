@@ -91,7 +91,7 @@ def computer_input(magic_square, game_board, plays,human_list, computer_list):
             for j in range(3):
                 if x == magic_square[i][j]:
                     computer_list.append(x)
-                    game_board[i][j] = play
+                    game_board[i][j] = plays
                     return game_board
 
     pairs_sum = pairs(human_list)
@@ -156,7 +156,7 @@ def game(magic_square, game_board,plays, human_list, computer_list, draw, lost):
                     print("Drawed games: ", draw, "lost games: ", lost)
                     replay = input("If you want to play again press Y else N")
                     if replay == 'Y':
-                        game(magic_square, game_board,plays, human_list, computer_list)
+                        game(magic_square, game_board,plays, human_list, computer_list,draw,lost)
                     break
                 print("computer's turn")
                 print()
