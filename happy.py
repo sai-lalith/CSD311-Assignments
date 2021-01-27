@@ -1,3 +1,4 @@
+#2
 import random
 game_board = [[0, 0, 0],
             [0, 0, 0],
