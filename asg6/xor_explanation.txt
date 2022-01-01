@@ -1,0 +1,39 @@
+clear all;
+pr1=[0 1;0 1];%Set the value range of each element of the random perceptron layer input problem
+while 1
+net1=newp(pr1,3);
+% Specify the random perceptron layer weight initialization function as a random function
+net1.inputweights{1}.initFcn='rands';
+% Specify the random perceptron layer threshold initialization function as a random function
+net1.biases{1}.initFcn='rands';
+net1=init(net1);%Initialize the random perceptron layer
+iw1=net1.iw{1};
+b1=net1.b{1};
+% Random perceptron layer simulation
+p1=[0 0;0 1;1 0;1 1]';%Random perceptron input vector (sample)
+[a1,pf]=sim(net1,p1);
+% Initialize the second perceptron layer
+pr2=[0 1;0 1;0 1];% Set the value range of each element of the second perceptron input vector
+net2=newp(pr2,1);% Define the second perceptron layer
+% Train the second perceptron layer
+net2.trainParam.epochs=10;
+net2.trainParam.show=1;
+p2=ones(3,4);% Initialize the input vector of the second perceptron layer
+p2=p2.*a1;% The simulation output result of the random perceptron layer is used as the input vector of the second perceptron
+t2=[0 1 1 0];
+% Target vector of the second perceptron layer
+%Training the second perceptron layer
+[net2,tr2]=train(net2,p2,t2);
+a2=sim(net2,p2)
+if a2==t2
+    break
+end
+end
+disp('The length of each step in the output training process is：')
+epoch2=tr2.epoch
+disp('Output the bad error in the training process：')
+perf2=tr2.perf
+disp('The weight vector of the second perceptron is：')
+iw2=net2.iw{1}
+disp('The threshold vector of the second perceptron is：')
+iw2=net2.b{1}
