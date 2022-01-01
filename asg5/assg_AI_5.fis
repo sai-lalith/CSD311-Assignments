@@ -1,0 +1,55 @@
+[System]
+Name='asg_5'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=7
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='academics'
+Range=[0 10]
+NumMFs=4
+MF1='poor':'trapmf',[0 0 3 3.5]
+MF2='average':'trapmf',[3 4 5 5.5]
+MF3='fair':'trapmf',[5 6 7.5 8]
+MF4='outstanding':'trapmf',[7.5 8.5 10 10]
+
+[Input2]
+Name='sports'
+Range=[0 10]
+NumMFs=3
+MF1='unfit':'gaussmf',[1.25 0]
+MF2='fit':'gaussmf',[1.5 5]
+MF3='athletic':'gaussmf',[1.25 10]
+
+[Input3]
+Name='co-curricular'
+Range=[0 10]
+NumMFs=3
+MF1='poor':'trimf',[0 1.5 3]
+MF2='average':'trimf',[3 5 7]
+MF3='excellent':'trimf',[7 8.5 10]
+
+[Output1]
+Name='performance'
+Range=[0 10]
+NumMFs=4
+MF1='poor':'trapmf',[0 0 2 3]
+MF2='average':'trapmf',[2 3 5 6]
+MF3='good':'trapmf',[5 6 7 8]
+MF4='excellent':'trapmf',[7 8 10 10]
+
+[Rules]
+4 0 0, 4 (1) : 1
+3 3 3, 4 (1) : 1
+3 2 2, 3 (1) : 1
+3 1 1, 2 (1) : 1
+2 3 3, 3 (1) : 1
+2 2 2, 2 (1) : 1
+1 1 1, 1 (1) : 2
